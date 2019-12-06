@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{EBEC97B7-49B4-4B4A-AD0F-4C58FD894069}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MyPALVGA</RootNamespace>
-    <AssemblyName>MyPALVGA</AssemblyName>
+    <RootNamespace>PALConverter</RootNamespace>
+    <AssemblyName>PALConverter</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -52,7 +52,7 @@
     <ManifestCertificateThumbprint>5268C3890790F852B6BCB81F633FCAACA4D32E9E</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>MyPALVGA_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>PALConverter_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -103,7 +103,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="MyPALVGA_TemporaryKey.pfx" />
+    <None Include="PALConverter_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

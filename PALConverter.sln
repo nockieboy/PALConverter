@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPALVGA", "MyPALVGA\MyPALVGA.csproj", "{EBEC97B7-49B4-4B4A-AD0F-4C58FD894069}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PALConverter", "PALConverter\PALConverter.csproj", "{EBEC97B7-49B4-4B4A-AD0F-4C58FD894069}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
