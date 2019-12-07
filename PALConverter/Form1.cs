@@ -27,18 +27,24 @@ namespace MyPALVGA
             int address = 0;
             string output = "";
 
-            // prime the text box
-            output = "-- PALConverter-generated Memory Initialisation File (.mif)\r\n";
-            output += "-- For use with Quartus II & Quartus Prime.\r\n";
-            output += "-- Generated at: " + DateTime.Now + "\r\n";
-            output += "\r\n";
-            output += "WIDTH=16;\r\n";
-            output += "DEPTH=256;\r\n";
-            output += "\r\n";
-            output += "ADDRESS_RADIX=HEX;\r\n";
-            output += "DATA_RADIX=HEX;\r\n";
-            output += "\r\n";
-            output += "CONTENT BEGIN\r\n";
+            if (!rbTextFormat.Checked)
+            {
+                // prime the output
+                output = "-- PALConverter-generated Memory Initialisation File (.mif)\r\n";
+                output += "-- For use with Quartus II & Quartus Prime.\r\n";
+                output += "-- Generated at: " + DateTime.Now + "\r\n";
+                output += "\r\n";
+                output += "WIDTH=16;\r\n";
+                output += "DEPTH=256;\r\n";
+                output += "\r\n";
+                output += "ADDRESS_RADIX=HEX;\r\n";
+                output += "DATA_RADIX=HEX;\r\n";
+                output += "\r\n";
+                output += "CONTENT BEGIN\r\n";
+            } else
+            {
+                output = "palette=(\r\n";
+            }
 
             // split the string into an array
             string[] values = paletteCode.Split(delimiterChars);
@@ -78,19 +84,39 @@ namespace MyPALVGA
                     rgb_out[0] = (rgb[1] & 0xF0) | ((rgb[2] & 0xF0) >> 4);
                 }
 
-                output += "    " + String.Format("{0:X3}", address) + "  :   ";
-                output += String.Format("{0:X2}", rgb_out[1]) + String.Format("{0:X2}", rgb_out[0]) + ";\r\n";
+                if (!rbTextFormat.Checked)
+                {
+                    output += "    " + String.Format("{0:X3}", address) + "  :   ";
+                    output += String.Format("{0:X2}", rgb_out[1]) + String.Format("{0:X2}", rgb_out[0]) + ";\r\n";
+                } else
+                {
+                    output += String.Format("{0:X2}", rgb_out[1]) + String.Format("{0:X2}", rgb_out[0]) + ", ";
+                    if ((address + 1) % 8 == 0)
+                    {
+                        output += "\r\n";
+                    }
+                }
 
                 address++;
 
                 progressBar.Value = (address/values.Length) * 100;
             }
 
-            if (address < 255)
+            if (!rbTextFormat.Checked)
             {
-                output += "    [" + String.Format("{0:X3}", address) + "..0FF]  :   0000;\r\n";
+                if (address < 255)
+                {
+                    output += "    [" + String.Format("{0:X3}", address) + "..0FF]  :   0000;\r\n";
+                }
+                output += "END;\r\n";
+            } else
+            {
+                // remove last space and comma and any CRLF if present
+                output = output.Substring(0, output.LastIndexOf(','));
+
+                // close the brackets
+                output += ");";
             }
-            output += "END;\r\n";
 
             // SUCCESS!
             if (radioButton1.Checked)
@@ -100,6 +126,8 @@ namespace MyPALVGA
             {
                 toolStripStatusLabel1.Text = "SUCCESS! Converted to RGB4444.";
             }
+
+            progressBar.Value = 0;
 
             return output;
 
